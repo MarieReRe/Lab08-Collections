@@ -5,15 +5,19 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace GenericLibrary
 {
-    class GenericLibrary
+    public class UserInterface
     {
 
         public static void Main()
         {
-            Console.WriteLine("Welcome to Marie and Francesco's really cool Library!");
-            UserMenu();
+           
             LibraryBooks();
-            ViewLibrary();
+            bool choices = true;
+            while (choices)
+            {
+                choices = UserChoice();
+            }
+           
 
         }
 
@@ -45,7 +49,7 @@ namespace GenericLibrary
             }
 
         }
-        public static void UserChoice()
+        public static bool UserChoice()
         {
             string userInput = Console.ReadLine();
             switch (userInput)
@@ -53,12 +57,43 @@ namespace GenericLibrary
 
                 case "1":
                     ViewLibrary();
-                   
-                break;
-               /* case "2":
-                    AddBook();
-                break;
-                case "3":
+                    return true;
+                
+                case "2":
+                    Console.WriteLine("Enter the Book you would like to add");
+                    while (true)
+                    {
+                        Console.WriteLine("Title of book");
+                        string title = Console.ReadLine();
+                        Console.WriteLine("\n Authors First Name");
+                        string firstName = Console.ReadLine();
+                        Console.WriteLine("\n Authors Last Name");
+                        string lastName = Console.ReadLine();
+                        if(title.Length <= 0 && firstName.Length <= 0 && lastName.Length <= 0)
+                        {
+                            if (title.Length <= 0) Console.WriteLine("Please enter a book title to add new book");
+                            if (firstName.Length <= 0) Console.WriteLine("Authors need a first name");
+                            if (lastName.Length <= 0) Console.WriteLine("Authors need a last name");
+
+                        }
+
+                        else
+                        {
+
+                            bool addBook = true;
+                            while (addBook)
+                            {
+                                addBook = AddBook(title, firstName, lastName); 
+                            }
+                            break;
+                           
+                          
+                        }
+
+                    }
+                    Console.WriteLine("Sucessfully added your book to the library");
+                    return true;
+                /*case "3":
                     BorrowBook();
                 break;
                 case "4":
@@ -73,7 +108,7 @@ namespace GenericLibrary
                 default:
                     Console.WriteLine("Wrong choice, try again");
                 Console.ReadLine();
-                break;
+                    return true;
             
            
             }
@@ -106,21 +141,66 @@ namespace GenericLibrary
         public static void ViewLibrary()
         {
 
-            try
-            {
+           
                 foreach (Book book in FrancescoAndMarieLibrary)
                 {
                     Console.WriteLine($"{book.title} | Author: {book.author.FirstName}{book.author.LastName} | Genre: {book.genre}");
 
                 }
-
-            }
-            finally
-            {
-                UserChoiceNextRound();
-            }
-            
         }
+
+        //Add books
+        static bool AddBook(string title, string firstName, string lastName)
+        {
+            Console.WriteLine("Please choose a number  Genre to proceed");
+            Console.WriteLine("1. Fantasy");
+            Console.WriteLine("2. Cooking");
+            Console.WriteLine("3. Selfhelp");
+            Console.WriteLine("4. Religion");
+            Console.WriteLine("5. Other");
+            string genreChoice = Console.ReadLine();
+            bool genre = true;
+            //Switch case for UI
+            switch (genreChoice)
+            {
+                case "1":
+                    Author author = new Author(firstName, lastName);
+                    Book book = new Book(title, author, Book.Genre.Fantasy);
+               
+                    genre = false;
+                    break;
+                   
+
+                default:
+                    Console.WriteLine("Wrong choice, try again");
+                    Console.ReadLine();
+                    break;
+                    
+                    
+                    
+            }
+            return genre;
+        }
+        //Borrow Book 
+
+      
+        // Return Book
+
+        //View Book Bag
+
+        //Exit
+      
+
+
+
+
+
+
+
+
+
+
+
         //reprompt to have user select anything else they might need
         public static void UserChoiceNextRound()
         {
