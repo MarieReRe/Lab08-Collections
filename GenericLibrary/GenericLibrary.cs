@@ -7,14 +7,14 @@ namespace GenericLibrary
 {
     public class GenericLibrary<T> : IEnumerable<T>
     {
-        T[] items;
-        int count;
+        T[] books;
+        int totalOfBooks;
 
         public GenericLibrary(int capacity)
         {
             if (capacity <= 0) throw new ArgumentException();
 
-            items = new T[capacity];
+            books = new T[capacity];
         }
 
         public GenericLibrary() : this(3)
@@ -22,26 +22,26 @@ namespace GenericLibrary
 
         }
 
-        public int Count => count;
+        public int TotalOfBooks => totalOfBooks;
 
-        public T this[int index] => items[index];
+        public T this[int index] => books[index];
 
         public void AddBook(T value)
         {
-            if (items.Length == count)
+            if (books.Length == totalOfBooks)
             {
-                Array.Resize(ref items, count * 2);
+                Array.Resize(ref books, totalOfBooks * 2);
             }
 
-            items[count] = value;
-            count++;
+            books[totalOfBooks] = value;
+            totalOfBooks++;
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < totalOfBooks; i++)
             {
-                yield return items[i];
+                yield return books[i];
             }
         }
 

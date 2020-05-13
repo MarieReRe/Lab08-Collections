@@ -10,7 +10,7 @@ namespace GenericLibrary.Tests
         {
             GenericLibrary<string> list = new GenericLibrary<string>();
 
-            Assert.Equal(0, list.Count);
+            Assert.Equal(0, list.TotalOfBooks);
 
         }
 
@@ -20,8 +20,11 @@ namespace GenericLibrary.Tests
             GenericLibrary<int> list = new GenericLibrary<int>();
 
             list.AddBook(2);
+            list.AddBook(10);
+            list.AddBook(40);
+            list.AddBook(0);
 
-            Assert.Equal(1, list.Count);
+            Assert.Equal(4, list.TotalOfBooks);
             Assert.Equal(2, list[0]);
         }
 
