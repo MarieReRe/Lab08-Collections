@@ -50,9 +50,10 @@ namespace GenericLibrary
             string userInput = Console.ReadLine();
             switch (userInput)
             {
-             	        
-		        case "1": 
+
+                case "1":
                     ViewLibrary();
+                   
                 break;
                /* case "2":
                     AddBook();
@@ -98,17 +99,43 @@ namespace GenericLibrary
                 FrancescoAndMarieLibrary.Add(book);
             }
 
-
-
+           
 
         }
 
         public static void ViewLibrary()
         {
-            foreach(Book book in FrancescoAndMarieLibrary)
+
+            try
             {
-                Console.WriteLine($"{book.title} | Author: {book.author.FirstName}{book.author.LastName} | Genre: {book.genre}");
-               
+                foreach (Book book in FrancescoAndMarieLibrary)
+                {
+                    Console.WriteLine($"{book.title} | Author: {book.author.FirstName}{book.author.LastName} | Genre: {book.genre}");
+
+                }
+
+            }
+            finally
+            {
+                UserChoiceNextRound();
+            }
+            
+        }
+        //reprompt to have user select anything else they might need
+        public static void UserChoiceNextRound()
+        {
+            Console.WriteLine("Is there anything else we can do for you today?");
+            Console.WriteLine("Yes/No");
+
+            string response = Console.ReadLine().ToLower();
+
+            if (response == "yes" || response == "y")
+            {
+                UserChoice();
+            }
+            else
+            {
+                Console.WriteLine("Thanks for choosing DeltaV ATM. GoodBye");
             }
         }
     }
