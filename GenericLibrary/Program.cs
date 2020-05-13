@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace GenericLibrary
 {
-    class Program
+    class GenericLibrary
     {
-        static void Main(string[] args)
+
+        public static void Main()
         {
-            Console.WriteLine("Hello World!");
+
         }
     }
 }

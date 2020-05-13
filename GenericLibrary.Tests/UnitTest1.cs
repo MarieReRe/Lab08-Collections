@@ -8,21 +8,23 @@ namespace GenericLibrary.Tests
         [Fact]
         public void InitialListEmpty()
         {
-            MyGenericList<string> list = new MyGenericList<string>();
+            GenericLibrary<string> list = new GenericLibrary<string>();
 
-            Assert.Equal(object, list.Count);
+            Assert.Equal(0, list.Count);
 
         }
 
         [Fact]
         public void CanAddEmptyList()
         {
-            MyGenericList<string> list = new MyGenericList<string>();
+            GenericLibrary<int> list = new GenericLibrary<int>();
 
-            list.Add(2);
+            list.AddBook(2);
 
             Assert.Equal(1, list.Count);
             Assert.Equal(2, list[0]);
         }
+
+        
     }
 }
