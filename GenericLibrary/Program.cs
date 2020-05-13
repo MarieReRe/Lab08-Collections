@@ -12,11 +12,8 @@ namespace GenericLibrary
         {
            
             LibraryBooks();
-            bool choices = true;
-            while (choices)
-            {
-                choices = UserChoice();
-            }
+            UserMenu();
+            ViewLibrary();
            
 
         }
