@@ -39,6 +39,19 @@ namespace GenericLibrary
             
         }
 
+        public bool Remove(T BookToRemove)
+        {
+            for (int i = 0; i < totalOfBooks; i++)
+            {
+                if(BookToRemove.Equals(books[i]))
+                {
+                    totalOfBooks =- 1;
+                }
+                return true;
+            }
+            return false;
+        }
+
         public IEnumerator<T> GetEnumerator()
         {
             for (int i = 0; i < totalOfBooks; i++)

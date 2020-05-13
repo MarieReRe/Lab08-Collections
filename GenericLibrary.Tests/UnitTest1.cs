@@ -70,6 +70,24 @@ namespace GenericLibrary.Tests
                 list);
         }
 
+        [Fact]
+        public void CanRemoveBook()
+        {
+            GenericLibrary<string> list = new GenericLibrary<string>
+            {
+                "The Way of Kings",
+                "Nopi",
+                "Name of the Wind",
+                "The Italian Teacher"
+            };
+
+            Assert.True(list.Remove("Nopi"));
+
+            
+
+            
+        }
+
         
     }
 }
