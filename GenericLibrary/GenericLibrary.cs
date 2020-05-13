@@ -17,16 +17,16 @@ namespace GenericLibrary
             books = new T[capacity];
         }
 
-        public GenericLibrary() : this(3)
+        public GenericLibrary() : this(4)
         {
 
         }
 
-        public int TotalOfBooks => totalOfBooks;
+        public int Count => totalOfBooks;
 
         public T this[int index] => books[index];
 
-        public void AddBook(T value)
+        public int Add(T value)
         {
             if (books.Length == totalOfBooks)
             {
@@ -35,6 +35,8 @@ namespace GenericLibrary
 
             books[totalOfBooks] = value;
             totalOfBooks++;
+            return totalOfBooks;
+            
         }
 
         public IEnumerator<T> GetEnumerator()
