@@ -82,9 +82,6 @@ namespace GenericLibrary.Tests
             };
 
             Assert.True(list.Remove("Nopi"));
-
-            
-
             
         }
 
