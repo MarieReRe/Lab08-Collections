@@ -6,7 +6,7 @@ This is a c# program that allows users to use the console to borrow and return b
 
 
 # Set Up
-$ git clone [ ]
+$ git clone [https://github.com/mrsantons/Lab08-Collections.git]
 
 To run the program from Visual Studio:
 Select File -> Open -> Project/Solution
