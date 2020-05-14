@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GenericLibrary
 {
-    class Book
+    public class Book
     {
 
         public string title { get; set; }
@@ -22,7 +22,13 @@ namespace GenericLibrary
         }
 
         public enum Genre 
-        { Fantasy, Cooking, Selfhelp, Religion, Other}
+        {
+            Fantasy,
+            Cooking,
+            Selfhelp,
+            Religion, 
+            Other
+        }
 
        
 
