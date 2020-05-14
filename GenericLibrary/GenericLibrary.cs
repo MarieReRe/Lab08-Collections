@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace GenericLibrary
@@ -8,7 +9,7 @@ namespace GenericLibrary
     public class GenericLibrary<T> : IEnumerable<T>
     {
         T[] books;
-        int totalOfBooks;
+        int totalOfBooks = 0;
 
         public GenericLibrary(int capacity)
         {
@@ -26,28 +27,46 @@ namespace GenericLibrary
 
         public T this[int index] => books[index];
 
-        public int Add(T value)
+        public void Add(T book)
         {
-            if (books.Length == totalOfBooks)
+            if (totalOfBooks == books.Length)
             {
                 Array.Resize(ref books, totalOfBooks * 2);
             }
-
-            books[totalOfBooks] = value;
-            totalOfBooks++;
-            return totalOfBooks;
+            books[totalOfBooks++] = book;
+            
+            
             
         }
 
-        public bool Remove(T BookToRemove)
+        public void Remove(T book)
         {
+
+       
             for (int i = 0; i < totalOfBooks; i++)
             {
-                if(BookToRemove.Equals(books[i]))
+                if(BookExists(book))
                 {
-                    totalOfBooks =- 1;
+                    for (int j = 0; j < totalOfBooks - i; j++)
+                    {
+                        books[i] = books[i + 1];
+                        i++;
+                    }
                 }
-                return true;
+            }
+            totalOfBooks--;
+           
+        }
+        public bool BookExists(T book)
+        {
+
+            //what we had originally. missed a whle step
+            for(int i = 0; i < totalOfBooks; i++)
+            {
+                if (books[i].Equals(book))
+                {
+                    return true;
+                }
             }
             return false;
         }

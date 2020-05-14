@@ -81,10 +81,15 @@ namespace GenericLibrary.Tests
                 "The Italian Teacher"
             };
 
-            Assert.True(list.Remove("Nopi"));
+         
+            //
+            Assert.Equal(3, list.Count);
+            
             
         }
 
+        //can remove something not in list assert false
+        
         
     }
 }
