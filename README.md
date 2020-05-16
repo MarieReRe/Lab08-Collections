@@ -23,3 +23,6 @@ Then select and open lab08-collections.
 ## To Run This Program
 Open the program using Visual Studio and click "Start" button to run this program.
 # Visuals
+
+**Start Menu**
+![](https://github.com/mrsantons/Lab08-Collections/blob/master/Visuals/menu.jpg)
