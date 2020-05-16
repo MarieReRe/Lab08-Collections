@@ -32,3 +32,6 @@ Open the program using Visual Studio and click "Start" button to run this progra
 
 **Add Book**
 ![](https://github.com/mrsantons/Lab08-Collections/blob/master/Visuals/add.jpg)
+
+**Check if Book was Added**
+![](https://github.com/mrsantons/Lab08-Collections/blob/master/Visuals/checkIfAdded.jpg)
