@@ -18,7 +18,7 @@ namespace GenericLibrary
             books = new T[capacity];
         }
 
-        public GenericLibrary() : this(4)
+        public GenericLibrary() : this(10)
         {
 
         }
