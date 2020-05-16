@@ -21,7 +21,6 @@ namespace GenericLibrary
 
         public static GenericLibrary<Book> FrancescoAndMarieLibrary = new GenericLibrary<Book>();
         public static List<Book> BookBag = new List<Book>();
-
         public static Book.Genre BookGenre = new Book.Genre();
         // USER MENU
         public static void UserMenu()
