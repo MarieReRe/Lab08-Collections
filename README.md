@@ -1,5 +1,5 @@
 # Lab08-Collections
-![.NET Core](https://github.com/mrsantons/Lab08-Collections/workflows/.NET%20Core/badge.svg)
+
 
 
 Creators: Francesco and Marie
