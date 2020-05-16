@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 
 namespace GenericLibrary
 {
     public class GenericLibrary<T> : IEnumerable<T>
     {
         T[] books;
-        int totalOfBooks = 0;
+        private int totalOfBooks = 0;
 
         public GenericLibrary(int capacity)
         {
@@ -39,36 +37,34 @@ namespace GenericLibrary
             
         }
 
-        public void Remove(T book)
+        public bool Remove(T book)
         {
-
+            int indexToRemove = -1;
        
             for (int i = 0; i < totalOfBooks; i++)
             {
-                if(BookExists(book))
+                if (EqualityComparer<T>.Default.Equals(books[i], book))
                 {
-                    for (int j = 0; j < totalOfBooks - i; j++)
-                    {
-                        books[i] = books[i + 1];
-                        i++;
-                    }
+                    indexToRemove = i;
+                    break;
                 }
             }
-            totalOfBooks--;
-           
+            return RemoveAt(indexToRemove);
         }
-        public bool BookExists(T book)
+        public bool RemoveAt(int indexToRemove)
         {
-
-            //what we had originally. missed a whle step
-            for(int i = 0; i < totalOfBooks; i++)
+            if (indexToRemove < 0)
             {
-                if (books[i].Equals(book))
-                {
-                    return true;
-                }
+                return false;
             }
-            return false;
+
+            for (int i = indexToRemove; i < totalOfBooks; i++)
+            {
+                books[i] = books[i + 1];
+            }
+
+            books[totalOfBooks--] = default;
+            return true;
         }
 
         public IEnumerator<T> GetEnumerator()
