@@ -26,3 +26,9 @@ Open the program using Visual Studio and click "Start" button to run this progra
 
 **Start Menu**
 ![](https://github.com/mrsantons/Lab08-Collections/blob/master/Visuals/menu.jpg)
+
+**View Library**
+![](https://github.com/mrsantons/Lab08-Collections/blob/master/Visuals/view.jpg)
+
+**Add Book**
+![](https://github.com/mrsantons/Lab08-Collections/blob/master/Visuals/add.jpg)
