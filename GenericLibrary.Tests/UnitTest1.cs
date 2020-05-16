@@ -80,6 +80,7 @@ namespace GenericLibrary.Tests
                 "Name of the Wind",
                 "The Italian Teacher"
             };
+            list.Remove("Nopi");
 
          
           
