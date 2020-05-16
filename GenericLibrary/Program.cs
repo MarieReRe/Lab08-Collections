@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 
 namespace GenericLibrary
@@ -19,6 +20,9 @@ namespace GenericLibrary
         }
 
         public static GenericLibrary<Book> FrancescoAndMarieLibrary = new GenericLibrary<Book>();
+        public static List<Book> BookBag = new List<Book>();
+
+        public static Book.Genre BookGenre = new Book.Genre();
         // USER MENU
         public static void UserMenu()
         {
@@ -54,6 +58,7 @@ namespace GenericLibrary
 
                 case "1":
                     ViewLibrary();
+                    UserChoiceNextRound();
                     return true;
                 
                 case "2":
@@ -88,23 +93,34 @@ namespace GenericLibrary
                         }
 
                     }
-                    Console.WriteLine("Sucessfully added your book to the library");
+                    Console.WriteLine("Successfully added your book to the library");
+                    UserChoiceNextRound();
                     return true;
-                /*case "3":
-                    BorrowBook();
-                break;
+                case "3":
+                    Console.WriteLine("Please enter the name of the book you would like to borrow ");
+                    ViewLibrary();
+                    string bookToBeBorrowed = Console.ReadLine();
+                    BorrowBOok(bookToBeBorrowed);
+                    //next choice
+                    UserChoiceNextRound();
+                    return true;
                 case "4":
                     ReturnBook();
-                break;
+                    return true;
+                
                 case "5":
-                    ViewBookBag();
-                break;
+                    int totalBooksInBag = ViewBookBag();
+                    Console.WriteLine($"There are total {totalBooksInBag} in your books in your bag");
+                    Console.ReadLine();
+                    UserChoiceNextRound();
+                    return true;
+
                 case "6":
-                    LeaveLibrary();
-                break;*/
+                    Console.WriteLine("Please visit the library again");
+                    return false;
                 default:
-                    Console.WriteLine("Wrong choice, try again");
-                Console.ReadLine();
+                    Console.WriteLine("Wrong choice, try again"); 
+                    Console.ReadLine();
                     return true;
             
            
@@ -138,12 +154,19 @@ namespace GenericLibrary
         public static void ViewLibrary()
         {
 
-           
+            try
+            {
                 foreach (Book book in FrancescoAndMarieLibrary)
                 {
                     Console.WriteLine($"{book.title} | Author: {book.author.FirstName}{book.author.LastName} | Genre: {book.genre}");
 
                 }
+            }
+            catch (NullReferenceException ex)
+            {
+
+                Console.WriteLine($"Sorry no books left in your book bag {0}", ex.Message);
+            }
         }
 
         //Add books
@@ -163,40 +186,107 @@ namespace GenericLibrary
                 case "1":
                     Author author = new Author(firstName, lastName);
                     Book book = new Book(title, author, Book.Genre.Fantasy);
+                    FrancescoAndMarieLibrary.Add(book);
                
                     genre = false;
                     break;
-                   
+                case "2":
+                    Author author2 = new Author(firstName, lastName);
+                    Book book2 = new Book(title, author2, Book.Genre.Cooking);
+                    FrancescoAndMarieLibrary.Add(book2);
 
+                    genre = false;
+                    break;
+                case "3":
+                    Author author3 = new Author(firstName, lastName);
+                    Book book3 = new Book(title, author3, Book.Genre.Selfhelp);
+                    FrancescoAndMarieLibrary.Add(book3);
+                    genre = false;
+                    break;
+                case "4":
+                    Author author4 = new Author(firstName, lastName);
+                    Book book4 = new Book(title, author4, Book.Genre.Religion);
+                    FrancescoAndMarieLibrary.Add(book4);
+                    genre = false;
+                    break;
+                case "5":
+                    Author author5 = new Author(firstName, lastName);
+                    Book book5 = new Book(title, author5, Book.Genre.Other);
+                    FrancescoAndMarieLibrary.Add(book5);
+                    genre = false;
+                    break;
                 default:
                     Console.WriteLine("Wrong choice, try again");
                     Console.ReadLine();
                     break;
-                    
-                    
-                    
+    
             }
             return genre;
         }
         //Borrow Book 
-
+        static void BorrowBOok(string title)
+        {
+            foreach (Book book in FrancescoAndMarieLibrary)
+            {
+                if (book.title == title)
+                {
+                    BookBag.Add(book);
+                    FrancescoAndMarieLibrary.Remove(book);
+                }
+            }
+        }
       
         // Return Book
+        static string ReturnBook()
+        {
+            if (BookBag.Count == 0)
+            {
+                Console.WriteLine("Your book bag is empty");
+                Console.ReadLine();
+                return "";
+            }
 
+            Console.WriteLine("Please select the number of books you'd like to return");
+            Dictionary<int, Book> booksInBookBag = new Dictionary<int, Book>();
+            int bookCount = 1;
+            foreach (Book book in BookBag)
+            {
+                Console.WriteLine($"{bookCount}: {book.title} | {book.author.FirstName} | {book.author.LastName} |{book.genre}");
+                bookCount++;
+            }
+            //https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/out-parameter-modifier
+
+            string bookNumber = Console.ReadLine();
+            int.TryParse(bookNumber, out int selectionResult);
+            booksInBookBag.TryGetValue(selectionResult, out Book bookReturned);
+            BookBag.Remove(bookReturned);
+            FrancescoAndMarieLibrary.Add(bookReturned);
+            return "Removed book and added it back to library";
+
+        }
         //View Book Bag
+        static int ViewBookBag()
+        {
+            int totalBooksInBag = 0;
+            foreach (var book in BookBag)
+            {
+                totalBooksInBag++;
+            }
 
+            if (totalBooksInBag == 0)
+            {
+                Console.WriteLine("Your book bag is empty");
+            }
+
+            foreach (var book in BookBag)
+            {
+                Console.WriteLine($"{book.title} | {book.author.FirstName} | {book.author.LastName} | {book.genre}");
+            }
+
+            return totalBooksInBag;
+        }
         //Exit
       
-
-
-
-
-
-
-
-
-
-
 
         //reprompt to have user select anything else they might need
         public static void UserChoiceNextRound()
@@ -212,7 +302,7 @@ namespace GenericLibrary
             }
             else
             {
-                Console.WriteLine("Thanks for choosing DeltaV ATM. GoodBye");
+                Console.WriteLine("Thanks for coming to the Library. GoodBye");
             }
         }
     }
